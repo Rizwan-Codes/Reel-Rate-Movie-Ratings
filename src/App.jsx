@@ -79,7 +79,7 @@ export default function App() {
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="bg-reel-charcoal border border-reel-teal/30 text-sm text-reel-paper/80 rounded-lg px-3 py-1.5 focus:outline-none"
+                                    className="bg-reel-charcoal border border-[#3A5A57]/30 text-sm text-[#EDE6D6]/80 rounded-lg px-3 py-1.5 focus:outline-none"
                                 >
                                     <option value="relevance">Sort: Relevance</option>
                                     <option value="yearDesc">Sort: Newest first</option>
@@ -89,15 +89,15 @@ export default function App() {
                         )}
 
                         {loading && (
-                            <p className="text-center text-reel-paper/50 mt-10">Searching...</p>
+                            <p className="text-center text-[#EDE6D6]/50 mt-10">Searching...</p>
                         )}
 
                         {error && (
-                            <p className="text-center text-reel-red mt-10">{error}</p>
+                            <p className="text-center text-[#C4432B] mt-10">{error}</p>
                         )}
 
                         {!loading && !error && !query && (
-                            <p className="text-center text-reel-paper/40 mt-16">
+                            <p className="text-center text-[#EDE6D6]/40 mt-16">
                                 Start typing a movie title to see ratings from IMDb, Rotten
                                 Tomatoes and Metacritic.
                             </p>

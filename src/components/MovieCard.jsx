@@ -1,3 +1,5 @@
+import { useFavorites} from "../context/FavoritesContext.jsx";
+
 const FALLBACK_POSTER = 'https://placehold.co/300x445/211D1A/C9A227?text=No+Poster'
 
 export default function MovieCard({ movie, onOpen }) {
@@ -16,10 +18,10 @@ export default function MovieCard({ movie, onOpen }) {
                     loading="lazy"
                 />
                 <div className="p-3">
-                    <h3 className="font-marquee text-sm uppercase tracking-wide text-reel-paper truncate">
+                    <h3 className="font-marquee text-sm uppercase tracking-wide text-[#EDE6D6] truncate">
                         {movie.Title}
                     </h3>
-                    <p className="text-xs text-reel-paper/50 mt-1">{movie.Year}</p>
+                    <p className="text-xs text-[#EDE6D6]/50 mt-1">{movie.Year}</p>
                 </div>
             </button>
             <button
