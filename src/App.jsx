@@ -1,18 +1,22 @@
-import { useState, useEffect } from 'react';
-import useDebounce from './hooks/useDebounce.js';
-import { OMDB_API_KEY, OMDB_BASE_URL } from './Config.js'
-import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
+import { useState, useEffect, useMemo, useCallback } from 'react'
+import { OMDB_API_KEY, OMDB_BASE_URL } from './config.js'
+import { useDebounce } from './hooks/useDebounce.js'
+import Header from './components/Header.jsx'
+import SearchBar from './components/SearchBar.jsx'
+import MovieGrid from './components/MovieGrid.jsx'
+import MovieModal from './components/MovieModel.jsx'
+import FavoritesPage from './components/FavoritesPage.jsx'
 
+export default function App() {
+    const [query, setQuery] = useState('')
+    const [movies, setMovies] = useState([])
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const [view, setView] = useState('search')
+    const [selectedID, setSelectedID] = useState(null)
+    const [sortBy, setSortBy] = useState('relevance')
 
-function App() {
-    const [view, setView] = useState('search');
-    const [query, setQuery] = useState('');
-    const [movies, setMovies] = useState([]);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
-
-    const debouncedQuery = useDebounce(query, 500);
+    const debouncedQuery = useDebounce(query, 500)
 
     useEffect(() => {
         if (!debouncedQuery.trim()) {
@@ -49,18 +53,64 @@ function App() {
         return () => controller.abort()
     }, [debouncedQuery])
 
+    const sortedMovies = useMemo(() => {
+        if (sortBy === 'relevance') return movies
+        const copy = [...movies]
+        copy.sort((a, b) =>
+            sortBy === 'yearDesc' ? b.Year - a.Year : a.Year - b.Year,
+        )
+        return copy
+    }, [movies, sortBy])
+
+    const openMovie = useCallback((imdbID) => setSelectedID(imdbID), [])
+    const closeMovie = useCallback(() => setSelectedID(null), [])
 
     return (
         <div className="min-h-screen grain-overlay">
             <Header view={view} setView={setView} />
 
             <main className="max-w-5xl mx-auto px-6 py-8">
-                {view === 'search' && (
-                    <SearchBar query={query} setQuery={setQuery} />
+                {view === 'search' ? (
+                    <>
+                        <SearchBar query={query} setQuery={setQuery} />
+
+                        {movies.length > 0 && (
+                            <div className="flex justify-end mt-4">
+                                <select
+                                    value={sortBy}
+                                    onChange={(e) => setSortBy(e.target.value)}
+                                    className="bg-reel-charcoal border border-reel-teal/30 text-sm text-reel-paper/80 rounded-lg px-3 py-1.5 focus:outline-none"
+                                >
+                                    <option value="relevance">Sort: Relevance</option>
+                                    <option value="yearDesc">Sort: Newest first</option>
+                                    <option value="yearAsc">Sort: Oldest first</option>
+                                </select>
+                            </div>
+                        )}
+
+                        {loading && (
+                            <p className="text-center text-reel-paper/50 mt-10">Searching...</p>
+                        )}
+
+                        {error && (
+                            <p className="text-center text-reel-red mt-10">{error}</p>
+                        )}
+
+                        {!loading && !error && !query && (
+                            <p className="text-center text-reel-paper/40 mt-16">
+                                Start typing a movie title to see ratings from IMDb, Rotten
+                                Tomatoes and Metacritic.
+                            </p>
+                        )}
+
+                        <MovieGrid movies={sortedMovies} onOpen={openMovie} />
+                    </>
+                ) : (
+                    <FavoritesPage onOpen={openMovie} />
                 )}
             </main>
+
+            <MovieModal imdbID={selectedID} onClose={closeMovie} />
         </div>
     )
 }
-
-export default App;
