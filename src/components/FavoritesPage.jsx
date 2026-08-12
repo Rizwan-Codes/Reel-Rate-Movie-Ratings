@@ -6,7 +6,7 @@ export default function FavoritesPage({ onOpen }) {
 
   if (favorites.length === 0) {
     return (
-      <div className="text-center py-20 text-reel-paper/50">
+      <div className="text-center py-20 text-[#EDE6D6]/50">
         <p className="text-lg">Your list is empty.</p>
         <p className="text-sm mt-1">Search a movie and tap the ☆ to save it here.</p>
       </div>
