@@ -8,15 +8,21 @@ import MovieModal from './components/MovieModel.jsx'
 import FavoritesPage from './components/FavoritesPage.jsx'
 
 export default function App() {
+    const [view, setView] = useState(() => {
+        return localStorage.getItem("view") || "search";
+    });
     const [query, setQuery] = useState('')
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    const [view, setView] = useState('search')
     const [selectedID, setSelectedID] = useState(null)
     const [sortBy, setSortBy] = useState('relevance')
 
     const debouncedQuery = useDebounce(query, 500)
+
+    useEffect(() => {
+        localStorage.setItem("view", view);
+    }, [view]);
 
     useEffect(() => {
         if (!debouncedQuery.trim()) {
