@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
-import { OMDB_API_KEY, OMDB_BASE_URL } from './config.js'
+import { OMDB_API_KEY, OMDB_BASE_URL } from './Config.js'
 import { useDebounce } from './hooks/useDebounce.js'
 import Header from './components/Header.jsx'
 import SearchBar from './components/SearchBar.jsx'
