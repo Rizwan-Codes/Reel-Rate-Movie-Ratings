@@ -86,7 +86,7 @@ export default function MovieModal({ imdbID, onClose }) {
                                 {movie.Ratings?.map((r) => (
                                     <span
                                         key={r.Source}
-                                        className="text-xs bg-[#161311]/60 border border-[#C4432B]/30 text-[#C4432B] px-2.5 py-1 rounded-full"
+                                        className="text-xs bg-[#161311]/60 border border-[#C9A227]/30 text-[#C9A227] px-2.5 py-1 rounded-full"
                                     >
                                         {r.Source}: {r.Value}
                                     </span>
@@ -112,7 +112,7 @@ export default function MovieModal({ imdbID, onClose }) {
                                 onClick={() => toggleFavorite(movie)}
                                 className={`mt-5 px-4 py-2 rounded-lg text-sm font-medium transition-colors ${saved
                                         ? 'bg-[#C4432B] text-[#EDE6D6]'
-                                        : 'bg-[#161311]/30 text-[#EDE6D6] hover:bg-[#161311]/50'
+                                        : 'bg-[#292F2C]/30 text-[#EDE6D6] hover:bg-[#292F2C]/50'
                                     }`}
                             >
                                 {saved ? '★ Remove from My List' : '☆ Add to My List'}
