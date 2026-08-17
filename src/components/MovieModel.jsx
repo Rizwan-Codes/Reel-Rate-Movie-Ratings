@@ -46,7 +46,7 @@ export default function MovieModal({ imdbID, onClose }) {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className="bg-[#211D1A] border border-[#3A5A57]/40 rounded-xl max-w-2xl w-full max-h-[85vh] overflow-y-auto relative"
+                className="bg-[#211D1A] border border-[#3A5A57]/40 rounded-xl max-w-2xl w-full max-h-[85vh] overflow-y-auto relative movie-modal-scrollbar"
             >
                 <button
                     onClick={onClose}

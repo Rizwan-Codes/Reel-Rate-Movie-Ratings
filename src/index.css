@@ -3,3 +3,23 @@
 body {
     background-color: #161311;
 }
+
+
+/* Movie Modal Scrollbar */
+.movie-modal-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.movie-modal-scrollbar::-webkit-scrollbar-track {
+    background: #161311;
+    border-radius: 10px;
+}
+
+.movie-modal-scrollbar::-webkit-scrollbar-thumb {
+    background: #3A5A57;
+    border-radius: 10px;
+}
+
+.movie-modal-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #C9A227;
+}
