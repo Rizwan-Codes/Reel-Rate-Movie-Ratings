@@ -38,7 +38,7 @@ export default function App() {
             setError(null)
             try {
                 const res = await fetch(
-                    `${OMDB_BASE_URL}?apikey=${OMDB_API_KEY}&s=${encodeURIComponent(debouncedQuery)}&type=movie`,
+                    `${OMDB_BASE_URL}?apikey=${OMDB_API_KEY}&s=${encodeURIComponent(debouncedQuery.trim())}&type=movie`,
                     { signal: controller.signal },
                 )
                 const data = await res.json()
