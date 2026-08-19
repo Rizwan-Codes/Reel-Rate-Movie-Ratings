@@ -6,6 +6,7 @@ import SearchBar from './components/SearchBar.jsx'
 import MovieGrid from './components/MovieGrid.jsx'
 import MovieModal from './components/MovieModel.jsx'
 import FavoritesPage from './components/FavoritesPage.jsx'
+import Footer from './components/Footer.jsx'
 
 export default function App() {
     const [view, setView] = useState(() => {
@@ -72,10 +73,10 @@ export default function App() {
     const closeMovie = useCallback(() => setSelectedID(null), [])
 
     return (
-        <div className="min-h-screen grain-overlay">
+        <div className="flex flex-col min-h-screen grain-overlay">
             <Header view={view} setView={setView} />
 
-            <main className="max-w-5xl mx-auto px-6 py-8">
+            <main className="grow w-full max-w-5xl mx-auto px-6 py-8">
                 {view === 'search' ? (
                     <>
                         <SearchBar query={query} setQuery={setQuery} />
@@ -117,6 +118,7 @@ export default function App() {
             </main>
 
             <MovieModal imdbID={selectedID} onClose={closeMovie} />
+            <Footer />
         </div>
     )
 }
