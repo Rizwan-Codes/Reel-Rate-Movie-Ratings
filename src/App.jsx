@@ -105,7 +105,7 @@ export default function App() {
 
                         {!loading && !error && !query && (
                             <p className="text-center text-[#EDE6D6]/40 mt-16">
-                                Start typing a movie title to see ratings from IMDb, Rotten
+                                Start typing a movie title to see ratings from OMDb, Rotten
                                 Tomatoes and Metacritic.
                             </p>
                         )}
